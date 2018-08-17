@@ -581,7 +581,7 @@ def propseg(img_input, options_dict):
     cmd += ['-centerline-binary']
 
     # run propseg
-    status, output = sct.run(cmd, verbose, raise_exception=False)
+    status, output = sct.run(cmd, verbose, raise_exception=False, is_sct_binary=True)
 
     # check status is not 0
     if not status == 0:
