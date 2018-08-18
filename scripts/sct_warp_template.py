@@ -22,10 +22,6 @@ from spinalcordtoolbox.image import Image
 from msct_parser import Parser
 import sct_utils as sct
 
-# get path of the script and the toolbox
-path_script = os.path.dirname(__file__)
-path_sct = os.path.dirname(path_script)
-
 
 # DEFAULT PARAMETERS
 class Param:
@@ -33,7 +29,7 @@ class Param:
     def __init__(self):
         self.debug = 0
         self.folder_out = 'label'  # name of output folder
-        self.path_template = os.path.join(path_sct, "data", "PAM50")
+        self.path_template = os.path.join(sct.__data_dir__, "PAM50")
         self.folder_template = 'template'
         self.folder_atlas = 'atlas'
         self.folder_spinal_levels = 'spinal_levels'

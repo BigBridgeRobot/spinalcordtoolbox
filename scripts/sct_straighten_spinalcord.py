@@ -120,10 +120,6 @@ class SpinalCordStraightener(object):
         # start timer
         start_time = time.time()
 
-        # get path of the toolbox
-        path_sct = os.environ.get("SCT_DIR", os.path.dirname(os.path.dirname(__file__)))
-        sct.printv(path_sct, verbose)
-
         # Display arguments
         sct.printv("\nCheck input arguments:", verbose)
         sct.printv("  Input volume ...................... " + fname_anat, verbose)
