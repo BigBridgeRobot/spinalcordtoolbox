@@ -73,7 +73,7 @@ def init_sct():
     add_elapsed_time_counter()
 
 
-def add_elapsed_time_counter()
+def add_elapsed_time_counter():
     """
     """
     import atexit
