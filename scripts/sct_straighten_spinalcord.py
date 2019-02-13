@@ -578,6 +578,7 @@ class SpinalCordStraightener(object):
                          '-o', 'tmp.anat_rigid_warp.nii.gz',
                          '-t', 'tmp.curve2straight.nii.gz',
                          '-n', 'BSpline[3]'],
+                         is_sct_binary=True,
                          verbose=verbose)
 
             if self.accuracy_results:
