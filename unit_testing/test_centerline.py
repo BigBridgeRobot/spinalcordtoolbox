@@ -19,7 +19,6 @@ import sct_utils as sct
 VERBOSE = 0
 
 
-@pytest.fixture(scope="session")
 def dummy_centerline_small(size_arr=(9, 9, 9), subsampling=1, dilate_ctl=0, hasnan=False, orientation='RPI'):
     """
     Create a dummy Image centerline of small size. Return the full and sub-sampled version along z.
@@ -34,13 +33,13 @@ def dummy_centerline_small(size_arr=(9, 9, 9), subsampling=1, dilate_ctl=0, hasn
     from numpy import poly1d, polyfit
     nx, ny, nz = size_arr
     # define polynomial-based centerline within X-Z plane, located at y=ny/4
-    x = np.array([round(nx/4.), round(nx/2.), round(3*nx/4.)])
+    x = np.array([int(round(nx/4.)), int(round(nx/2.)), int(round(3*nx/4.))])
     z = np.array([0, round(nz/2.), nz-1])
     p = poly1d(polyfit(z, x, deg=3))
     data = np.zeros((nx, ny, nz))
     # Loop across dilation of centerline. E.g., if dilate_ctl=1, result will be a square of 3x3 per slice.
     for ixiy_ctl in itertools.product(range(-dilate_ctl, dilate_ctl+1, 1), range(-dilate_ctl, dilate_ctl+1, 1)):
-        data[p(range(nz)).astype(np.int) + ixiy_ctl[0], round(ny / 4.) + ixiy_ctl[1], range(nz)] = 1
+        data[p(range(nz)).astype(np.int) + ixiy_ctl[0], int(round(ny / 4.)) + ixiy_ctl[1], range(nz)] = 1
     # generate Image object with RPI orientation
     affine = np.eye(4)
     nii = nib.nifti1.Nifti1Image(data, affine)
@@ -62,11 +61,11 @@ def dummy_centerline_small(size_arr=(9, 9, 9), subsampling=1, dilate_ctl=0, hasn
 
 # Generate a list of fake centerlines for testing different algorithms
 im_centerlines = [(dummy_centerline_small(size_arr=(41, 7, 9), subsampling=1, orientation='SAL'), 2.),
-                  (dummy_centerline_small(size_arr=(9, 9, 9), subsampling=3), 3.),
-                  (dummy_centerline_small(size_arr=(9, 9, 9), subsampling=1, hasnan=True), 2.),
-                  (dummy_centerline_small(size_arr=(30, 20, 50), subsampling=1), 3.),
-                  (dummy_centerline_small(size_arr=(30, 20, 50), subsampling=5), 4.),
-                  (dummy_centerline_small(size_arr=(30, 20, 50), dilate_ctl=2, subsampling=3, orientation='AIL'), 3.)]
+            (dummy_centerline_small(size_arr=(9, 9, 9), subsampling=3), 3.),
+            (dummy_centerline_small(size_arr=(9, 9, 9), subsampling=1, hasnan=True), 2.),
+            (dummy_centerline_small(size_arr=(30, 20, 50), subsampling=1), 3.),
+            (dummy_centerline_small(size_arr=(30, 20, 50), subsampling=5), 4.),
+            (dummy_centerline_small(size_arr=(30, 20, 50), dilate_ctl=2, subsampling=3, orientation='AIL'), 3.)]
 
 
 # noinspection 801,PyShadowingNames
