@@ -65,7 +65,8 @@ im_centerlines = [(dummy_centerline_small(size_arr=(41, 7, 9), subsampling=1, or
             (dummy_centerline_small(size_arr=(9, 9, 9), subsampling=1, hasnan=True), 2.),
             (dummy_centerline_small(size_arr=(30, 20, 50), subsampling=1), 3.),
             (dummy_centerline_small(size_arr=(30, 20, 50), subsampling=5), 4.),
-            (dummy_centerline_small(size_arr=(30, 20, 50), dilate_ctl=2, subsampling=3, orientation='AIL'), 3.)]
+            #(dummy_centerline_small(size_arr=(30, 20, 50), dilate_ctl=2, subsampling=3, orientation='AIL'), 3.),
+            ]
 
 
 # noinspection 801,PyShadowingNames
